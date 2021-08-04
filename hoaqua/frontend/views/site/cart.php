@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <tr>
                                     <td class="thumbnail-img">
                                         <a href="#">
-									<img class="img-fluid" src="images/img-pro-01.jpg" alt="" />
+									<img class="img-fluid" src="../images/img-pro-01.jpg" alt="" />
 								</a>
                                     </td>
                                     <td class="name-pr">
@@ -70,7 +70,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <tr>
                                     <td class="thumbnail-img">
                                         <a href="#">
-									<img class="img-fluid" src="images/img-pro-02.jpg" alt="" />
+									<img class="img-fluid" src="../images/img-pro-02.jpg" alt="" />
 								</a>
                                     </td>
                                     <td class="name-pr">
@@ -94,7 +94,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <tr>
                                     <td class="thumbnail-img">
                                         <a href="#">
-									<img class="img-fluid" src="images/img-pro-03.jpg" alt="" />
+									<img class="img-fluid" src="../images/img-pro-03.jpg" alt="" />
 								</a>
                                     </td>
                                     <td class="name-pr">

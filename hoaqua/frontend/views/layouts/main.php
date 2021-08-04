@@ -2,7 +2,7 @@
 
 use frontend\assets\AppAsset;
 use yii\helpers\Html;
-
+use yii\web\Request;
 AppAsset::register($this);
 ?>
 <?php $this->beginPage()?>
@@ -20,7 +20,6 @@ AppAsset::register($this);
     <meta name="author" content="">
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- Site CSS -->
@@ -33,7 +32,10 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody()?>
 
-
+<?php 
+    $url=Yii::$app->homeUrl.'site';
+    $baseurl=str_replace('site','',$url);
+?>
     <!-- Start Main Top -->
     <header class="main-header">
         <!-- Start Navigation -->
@@ -44,28 +46,30 @@ AppAsset::register($this);
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                    <a class="navbar-brand" href="index.html"><img src="images/logo.png" class="logo" alt=""></a>
+                <?php echo Html::a('<img src="images/logo.png" class="logo" alt="">', ['/'], $options = ['class'=> 'navbar-brand'])?>
+                   
                 </div>
                 <!-- End Header Navigation -->
+  
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-                        <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
-                        <li class="nav-item"><?php echo html::a('VỀ CHÚNG TÔI',['site/about']);?></li>
+                        <li class="nav-item active"><?php echo html::a("Home", ['/']); ?></li>
+                        <li class="nav-item"><?php echo html::a('VỀ CHÚNG TÔI', ['site/about']); ?></li>
                         <li class="dropdown">
                             <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">SHOP</a>
                             <ul class="dropdown-menu">
 								<li><a href="shop.html">Sidebar Shop</a></li>
-								<li><?php echo html::a('Chi tiết sản phẩm',['site/shop-detail']);?></li>
-                                <li><?php echo html::a('Giỏ hàng',['site/cart']);?></li>
-                                <li><?php echo html::a('Thanh toán',['site/checkout']);?></li>
+								<li><?php echo html::a('Chi tiết sản phẩm', ['site/shop-detail']); ?></li>
+                                <li><?php echo html::a('Giỏ hàng', ['site/cart']); ?></li>
+                                <li><?php echo html::a('Thanh toán', ['site/checkout']); ?></li>
                                 <li><a href="my-account.html">My Account</a></li>
                                 <li><a href="wishlist.html">Wishlist</a></li>
                             </ul>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
-                        <li class="nav-item"><?php echo html::a('Liên hệ',['site/contact']);?></li>
+                        <li class="nav-item"><?php echo html::a('Liên hệ', ['site/contact']); ?></li>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -120,7 +124,7 @@ AppAsset::register($this);
         </a>
       </div>
     <!-- End Slider -->
-<?= $content?>
+<?=$content?>
 
     <!-- Start Footer  -->
     <footer>

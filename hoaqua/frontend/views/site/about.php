@@ -22,13 +22,18 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
     <!-- End All Title Box -->
-
+<?php 
+    $hh=Yii::$app->homeUrl.'site';
+    $kk=str_replace('site','',$hh);
+   
+    
+?>
     <!-- Start About Page  -->
     <div class="about-box-main">
         <div class="container">
             <div class="row">
 				<div class="col-lg-6">
-                    <div class="banner-frame"> <img class="img-fluid" src="images/about-img.jpg" alt="" />
+                    <div class="banner-frame"> <img class="img-fluid" src="../images/about-img.jpg" alt="" />
                     </div>
                 </div>
                 <div class="col-lg-6">

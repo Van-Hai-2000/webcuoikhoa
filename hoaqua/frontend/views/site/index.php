@@ -75,10 +75,13 @@ $model1 = Products::find()->orderBy(new Expression('rand()'))->limit(4)->all();
                     </div>
                 </div>
             </div>
+            <?php $j=Yii::$app->homeUrl.'uploads/';
 
+?>
             <div class="row special-list">
                 <?php
 foreach ($model1 as $key):
+    
 ?>
                 <div class="col-lg-3 col-md-6 special-grid best-seller">
                     <div class="products-single fix">
@@ -86,7 +89,7 @@ foreach ($model1 as $key):
                             <div class="type-lb">
                                 <p class="sale">Sale</p>
                             </div>
-                            <img src="images/<?php echo $key->product_img ?>" class="img-fluid" alt="<?php echo $key->product_title ?>">
+                            <img src="<?php echo $j ?><?php echo $key->product_img ?>" class="img-fluid" alt="<?php echo $key->product_title ?>">
                             <div class="mask-icon">
                                 <ul>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
@@ -197,7 +200,7 @@ $h = Products::find()->all();
             
                 <div class="ins-inner-box">
                    
-                    <img src="images/<?php echo $value2["product_img"] ?>" alt="" />
+                    <img src="<?php echo $j ?><?php echo $value2["product_img"] ?>" alt="" />
 
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
