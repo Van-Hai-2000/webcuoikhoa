@@ -51,17 +51,16 @@ AppAsset::register($this);
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-                        <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
-                        <li class="nav-item"><?php echo html::a('VỀ CHÚNG TÔI',['site/about']);?></li>
+                        <li class="nav-item active"><li><?php echo html::a('Trang chủ',['/']);?></li></li>
+                        <li class="nav-item"><?php echo html::a('VỀ CHÚNG TÔI',['/site/about']);?></li>
                         <li class="dropdown">
                             <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">SHOP</a>
                             <ul class="dropdown-menu">
-								<li><a href="shop.html">Sidebar Shop</a></li>
+                                <li><?php echo html::a('Shop',['site/shop']);?></li>
 								<li><?php echo html::a('Chi tiết sản phẩm',['site/shop-detail']);?></li>
                                 <li><?php echo html::a('Giỏ hàng',['site/cart']);?></li>
                                 <li><?php echo html::a('Thanh toán',['site/checkout']);?></li>
-                                <li><a href="my-account.html">My Account</a></li>
-                                <li><a href="wishlist.html">Wishlist</a></li>
+                                <li><?php echo html::a('Tài khoản',['site/login']);?></li>
                             </ul>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
