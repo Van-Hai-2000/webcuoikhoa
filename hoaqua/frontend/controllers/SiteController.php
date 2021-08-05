@@ -169,13 +169,13 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays shop_detail page.
+     * Displays shopmore page.
      *
      * @return mixed
      */
-    public function actionShopdetail()
+    public function actionShopmore()
     {
-        return $this->render('shop-detail');
+        return $this->render('shopmore');
     }
 
     /**

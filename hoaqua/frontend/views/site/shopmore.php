@@ -1,17 +1,20 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $form yii\bootstrap\ActiveForm */
-/* @var $model \frontend\models\ContactForm */
 
 use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
-use yii\captcha\Captcha;
-
+use backend\models\Products;
+use yii\db\Expression;
 $this->title = 'Chi tiết sản phẩm';
 $this->params['breadcrumbs'][] = $this->title;
+
+	$pro_id=$_GET['id'];
+
+echo $pro_id;
+
 ?>
-<div class="site-shop-detail">
+<div class="site-shopmore">
+    <h1><?= Html::encode($this->title) ?></h1>
 
     <!-- Start All Title Box -->
     <div class="all-title-box">
@@ -28,13 +31,27 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- Start Shop Detail  -->
     <div class="shop-detail-box-main">
         <div class="container">
+            <?php
+           
+
+            $product = Products::find()->Where('id' == $pro_id)->all();
+          
+            //$customer = Products::findOne($pro_id);
+            //echo $product;
+            $j=Yii::$app->homeUrl.'uploads/';
+           
+                
+            ?>
             <div class="row">
+
+           
                 <div class="col-xl-5 col-lg-5 col-md-6">
                     <div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel">
                         <div class="carousel-inner" role="listbox">
-                            <div class="carousel-item active"> <img class="d-block w-100" src="images/big-img-01.jpg" alt="First slide"> </div>
-                            <div class="carousel-item"> <img class="d-block w-100" src="images/big-img-02.jpg" alt="Second slide"> </div>
-                            <div class="carousel-item"> <img class="d-block w-100" src="images/big-img-03.jpg" alt="Third slide"> </div>
+                            <?php  foreach ($product as $key): $i=0 ?>
+                            <div class="carousel-item"> <img class="d-block w-100" src="<?php echo $j.$key->product_img; ?>" alt=""> </div>
+                            <?php  endforeach;
+                            $i++;?>
                         </div>
                         <a class="carousel-control-prev" href="#carousel-example-1" role="button" data-slide="prev"> 
 						<i class="fa fa-angle-left" aria-hidden="true"></i>
@@ -57,6 +74,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         </ol>
                     </div>
                 </div>
+           
                 <div class="col-xl-7 col-lg-7 col-md-6">
                     <div class="single-product-details">
                         <h2>Fachion Lorem ipsum dolor sit amet</h2>
@@ -307,7 +325,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- End Cart -->
 
     <!-- Start Instagram Feed  -->
-    <div class="instagram-box">
+    <!-- <div class="instagram-box">
         <div class="main-instagram owl-carousel owl-theme">
             <div class="item">
                 <div class="ins-inner-box">
@@ -390,6 +408,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- End Instagram Feed  -->
 </div>

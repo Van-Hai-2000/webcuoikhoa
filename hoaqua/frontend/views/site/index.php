@@ -6,6 +6,32 @@ use yii\db\Expression;
 
 $this->title = 'My Yii Application';
 ?>
+    <!-- Start Slider -->
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img class="d-block w-100" src="images/banner-01.jpg" alt="First slide">
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src="images/banner-02.jpg" alt="Second slide">
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src="images/banner-03.jpg" alt="Third slide">
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    <!-- End Slider -->
+
+
+
 
     <!-- Start Categories  -->
     <?php
@@ -51,7 +77,6 @@ $model = Products::find()->limit(3)->all();
 	</div>
     <?php
 $model1 = Products::find()->orderBy(new Expression('rand()'))->limit(4)->all();
-
 ?>
     <!-- Start Products  -->
     <div class="products-box">
@@ -76,7 +101,6 @@ $model1 = Products::find()->orderBy(new Expression('rand()'))->limit(4)->all();
                 </div>
             </div>
             <?php $j=Yii::$app->homeUrl.'uploads/';
-
 ?>
             <div class="row special-list">
                 <?php
@@ -184,33 +208,3 @@ foreach ($model1 as $key):
         </div>
     </div>
     <!-- End Blog  -->
-
-<?php
-$h = Products::find()->all();
-
-?>
-    <!-- Start Instagram Feed  -->
-    <div class="instagram-box">
-        <div class="main-instagram owl-carousel owl-theme">
-        <?php foreach ($h as $key2 => $value2) {
-    if ($value2) {
-
-        ?>
-            <div class="item">
-            
-                <div class="ins-inner-box">
-                   
-                    <img src="<?php echo $j ?><?php echo $value2["product_img"] ?>" alt="" />
-
-                    <div class="hov-in">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                 
-                </div>
-                
-            </div>
-            <?php }?>
-                <?php }?>
-        </div>
-    </div>
-    <!-- End Instagram Feed  -->

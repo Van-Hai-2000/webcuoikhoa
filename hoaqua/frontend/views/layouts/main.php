@@ -3,6 +3,8 @@
 use frontend\assets\AppAsset;
 use yii\helpers\Html;
 use yii\web\Request;
+use backend\models\Products;
+use yii\db\Expression;
 AppAsset::register($this);
 ?>
 <?php $this->beginPage()?>
@@ -61,7 +63,7 @@ AppAsset::register($this);
                             <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">SHOP</a>
                             <ul class="dropdown-menu">
                                 <li><?php echo html::a('Shop',['site/shop']);?></li>
-								<li><?php echo html::a('Chi tiết sản phẩm',['site/shop-detail']);?></li>
+								<li><?php echo html::a('Chi tiết sản phẩm',['site/shopmore']);?></li>
                                 <li><?php echo html::a('Giỏ hàng',['site/cart']);?></li>
                                 <li><?php echo html::a('Thanh toán',['site/checkout']);?></li>
                                 <li><?php echo html::a('Tài khoản',['site/login']);?></li>
@@ -100,30 +102,42 @@ AppAsset::register($this);
 
     <!-- End Top Search -->
 
-    <!-- Start Slider -->
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img class="d-block w-100" src="images/banner-01.jpg" alt="First slide">
-          </div>
-          <div class="carousel-item">
-            <img class="d-block w-100" src="images/banner-02.jpg" alt="Second slide">
-          </div>
-          <div class="carousel-item">
-            <img class="d-block w-100" src="images/banner-03.jpg" alt="Third slide">
-          </div>
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
-    <!-- End Slider -->
+
 <?=$content?>
+<?php $j=Yii::$app->homeUrl.'uploads/';
+
+?>
+<?php
+$h = Products::find()->all();
+
+?>
+    <!-- Start Instagram Feed  -->
+    <div class="instagram-box">
+        <div class="main-instagram owl-carousel owl-theme">
+        <?php foreach ($h as $key2 => $value2) {
+    if ($value2) {
+
+        ?>
+            <div class="item">
+            
+                <div class="ins-inner-box">
+                   
+                    <img src="<?php echo $j ?><?php echo $value2["product_img"] ?>" alt="" />
+
+                    <div class="hov-in">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                 
+                </div>
+                
+            </div>
+            <?php }?>
+                <?php }?>
+        </div>
+    </div>
+    <!-- End Instagram Feed  -->
+
+
 
     <!-- Start Footer  -->
     <footer>
