@@ -66,7 +66,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <div class="row">
 
                                         <?php 
-                                        $model1 = Products::find()->orderBy(new Expression('rand()'))->limit(4)->all();
+                                        $model1 = Products::find()->all();
                                         $j=Yii::$app->homeUrl.'uploads/';
                                         foreach ($model1 as $key):
                                         ?>
