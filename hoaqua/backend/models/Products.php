@@ -98,4 +98,9 @@ class Products extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Brands::className(), ['id' => 'product_band']);
     }
+    public function getproid($id)
+    {
+        $data = Products::findOne(['id'=>$id]);
+        return $data;
+    }
 }

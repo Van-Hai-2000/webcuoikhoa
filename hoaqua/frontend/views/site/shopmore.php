@@ -4,9 +4,15 @@
 
 use backend\models\Products;
 use yii\helpers\Html;
+use yii\web\Session;
 $this->title = 'Chi tiết sản phẩm';
 $this->params['breadcrumbs'][] = $this->title;
+
 $pro_id = $_GET['id'];
+    
+
+
+
 echo $pro_id;
 
 ?>
@@ -29,8 +35,8 @@ echo $pro_id;
         <div class="container">
             <?php
 
-$product = Products::find()->Where('id' == $pro_id)->all();
-
+$product = Products::find()->Where(["id"=>$pro_id])->one();
+print_r($product);
 //$customer = Products::findOne($pro_id);
 //echo $product;
 $j = Yii::$app->homeUrl . 'uploads/';
@@ -39,36 +45,47 @@ $j = Yii::$app->homeUrl . 'uploads/';
             <div class="row">
 
 
-                <div class="col-xl-5 col-lg-5 col-md-6"> 
-	                    <div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel">
-	                        <?php foreach ($product as $key): $i = 0?>
-                            <div class="carousel-inner" role="listbox">
-
-	                            <div class="carousel-item"> <img class="d-block w-100" src="<?php echo $j . $key->product_img; ?>" alt=""> </div>
-	                        </div><?php endforeach; $i++;?>
-	                        <a class="carousel-control-prev" href="#carousel-example-1" role="button" data-slide="prev">
-							<i class="fa fa-angle-left" aria-hidden="true"></i>
-							<span class="sr-only">Previous</span>
-						</a>
-	                        <a class="carousel-control-next" href="#carousel-example-1" role="button" data-slide="next">
-							<i class="fa fa-angle-right" aria-hidden="true"></i>
-							<span class="sr-only">Next</span>
-						</a> 
+            <div class="col-xl-5 col-lg-5 col-md-6">
+                    <div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel">
+                        <div class="carousel-inner" role="listbox">
+                            
+                            <div class="carousel-item active"> <img class="d-block w-100" src="<?php echo $j.$product["product_img"] ?>" alt="First slide"> </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#carousel-example-1" role="button" data-slide="prev"> 
+						<i class="fa fa-angle-left" aria-hidden="true"></i>
+						<span class="sr-only">Previous</span> 
+					</a>
+                        <a class="carousel-control-next" href="#carousel-example-1" role="button" data-slide="next"> 
+						<i class="fa fa-angle-right" aria-hidden="true"></i> 
+						<span class="sr-only">Next</span> 
+					</a>
+                        <ol class="carousel-indicators">
+                            <?php 
+                                $arr=[1,2,3];
+                                $i=0;
+                                for ($i; $i <3 ; $i++) { 
+                                    $arr[$i]=$i;
+                            ?>
+                            <li data-target="#carousel-example-1" data-slide-to="<?php $arr[$i]?>"  >
+                                <img class="d-block w-100 img-fluid" src="<?php echo $j.$product["product_img"] ?>" alt="" />
+                            </li>
+                            <?php } ?>
+                           
+                        </ol>
                     </div>
                 </div>
 
                 <div class="col-xl-7 col-lg-7 col-md-6">
                     <div class="single-product-details">
-                        <h2>Fachion Lorem ipsum dolor sit amet</h2>
-                        <h5> <del>$ 60.00</del> $40.79</h5>
-                        <p class="available-stock"><span> More than 20 available / <a href="#">8 sold </a></span><p>
-						<h4>Short Description:</h4>
-						<p>Nam sagittis a augue eget scelerisque. Nullam lacinia consectetur sagittis. Nam sed neque id eros fermentum dignissim quis at tortor. Nullam ultricies urna quis sem sagittis pharetra. Nam erat turpis, cursus in ipsum at,
-							tempor imperdiet metus. In interdum id nulla tristique accumsan. Ut semper in quam nec pretium. Donec egestas finibus suscipit. Curabitur tincidunt convallis arcu. </p>
+                        <h2><?php echo $product->product_title ?></h2>
+                        <h5> <del>15000 VND</del> <?php echo $product->product_price ?> VND</h5>
+                        <p class="available-stock"><span> Có sẵn hơn 20 sản phẩm / <a href="#">8 đã bán </a></span><p>
+						<h4>Thông tin sản phẩm:</h4>
+						<p><?php echo $product->product_desc ?></p>
 						<ul>
 							<li>
 								<div class="form-group quantity-box">
-									<label class="control-label">Quantity</label>
+									<label class="control-label">Số lượng</label>
 									<input class="form-control" value="0" min="0" max="20" type="number">
 								</div>
 							</li>
@@ -76,8 +93,8 @@ $j = Yii::$app->homeUrl . 'uploads/';
 
 						<div class="price-box-bar">
 							<div class="cart-and-bay-btn">
-								<a class="btn hvr-hover" data-fancybox-close="" href="#">Buy New</a>
-								<a class="btn hvr-hover" data-fancybox-close="" href="#">Add to cart</a>
+								<a class="btn hvr-hover" data-fancybox-close="" href="#">Mua ngay</a>
+								<a class="btn hvr-hover" data-fancybox-close="" href="#">Thêm vào giỏ hàng</a>
 							</div>
 						</div>
 

@@ -1,10 +1,8 @@
 <?php
-
+use backend\models\Products;
 use frontend\assets\AppAsset;
 use yii\helpers\Html;
-use yii\web\Request;
-use backend\models\Products;
-use yii\db\Expression;
+use yii\web\Session;
 AppAsset::register($this);
 ?>
 <?php $this->beginPage()?>
@@ -33,10 +31,12 @@ AppAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody()?>
+<?php $j = Yii::$app->homeUrl . 'uploads/';
 
-<?php 
-    $url=Yii::$app->homeUrl.'site';
-    $baseurl=str_replace('site','',$url);
+?>
+<?php
+$url = Yii::$app->homeUrl . 'site';
+$baseurl = str_replace('site', '', $url);
 ?>
     <!-- Start Main Top -->
     <header class="main-header">
@@ -48,25 +48,25 @@ AppAsset::register($this);
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <?php echo Html::a('<img src="images/logo.png" class="logo" alt="">', ['/'], $options = ['class'=> 'navbar-brand'])?>
-                   
+                <?php echo Html::a('<img src="images/logo.png" class="logo" alt="">', ['/'], $options = ['class' => 'navbar-brand']) ?>
+
                 </div>
                 <!-- End Header Navigation -->
-  
+
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-                        <li class="nav-item active"><li><?php echo html::a('Trang chủ',['/']);?></li></li>
-                        <li class="nav-item"><?php echo html::a('VỀ CHÚNG TÔI',['/site/about']);?></li>
+                        <li class="nav-item active"><li><?php echo html::a('Trang chủ', ['/']); ?></li></li>
+                        <li class="nav-item"><?php echo html::a('VỀ CHÚNG TÔI', ['/site/about']); ?></li>
                         <li class="dropdown">
                             <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">SHOP</a>
                             <ul class="dropdown-menu">
-                                <li><?php echo html::a('Shop',['site/shop']);?></li>
-								<li><?php echo html::a('Chi tiết sản phẩm',['site/shopmore']);?></li>
-                                <li><?php echo html::a('Giỏ hàng',['site/cart']);?></li>
-                                <li><?php echo html::a('Thanh toán',['site/checkout']);?></li>
-                                <li><?php echo html::a('Tài khoản',['site/login']);?></li>
+                                <li><?php echo html::a('Shop', ['site/shop']); ?></li>
+								<li><?php echo html::a('Chi tiết sản phẩm', ['site/shopmore']); ?></li>
+                                <li><?php echo html::a('Giỏ hàng', ['site/cart']); ?></li>
+                                <li><?php echo html::a('Thanh toán', ['site/checkout']); ?></li>
+                                <li><?php echo html::a('Tài khoản', ['shopping']); ?></li>
                             </ul>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
@@ -76,13 +76,36 @@ AppAsset::register($this);
                 <!-- /.navbar-collapse -->
 
                 <!-- Start Atribute Navigation -->
-                <div class="attr-nav">
+                 <div class="attr-nav">
                     <ul>
                         <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
                         <li class="side-menu">
 							<a href="#">
 								<i class="fa fa-shopping-bag"></i>
-								<span class="badge">3</span>
+								<span class="badge" id="totalamount">
+                                <?php
+                                    if(isset($session['cart'])) {
+                                            $infoCart[] = array(
+                                            "product_title" => "",
+                                            "product_price" => "",
+                                            "product_img" => "",
+                                            "amount" => 1);
+                                            $totalAmount = $total = 0;
+                                    } 
+                                    else {
+                                        $session = Yii::$app->session;
+                                        $infoCart = $session['cart'];
+                                        $totalAmount = $total = 0;
+                                        foreach ($infoCart as $key => $value) {
+                                            $totalAmount += $value["amount"];
+                                            $total += $value["product_price"] * $value["amount"];
+                                        }
+
+                                    }
+
+                                    echo $totalAmount;
+                                    ?>
+                                </span>
 								<p>My Cart</p>
 							</a>
 						</li>
@@ -91,45 +114,47 @@ AppAsset::register($this);
                 <!-- End Atribute Navigation -->
             </div>
             <!-- Start Side Menu -->
-
-            <!-- End Side Menu -->
+            <div class="side">
+                <a href="#" class="close-side"><i class="fa fa-times"></i></a>
+                <li class="cart-box">
+                    <ul class="cart-list">
+                        <?php print_r($infoCart);
+                        foreach ($infoCart as $key => $value) {?>
+                        <li>
+                            <a href="#" class="photo"><img src="<?php echo $j . $value["product_img"] ?>" class="cart-thumb" alt="" /></a>
+                            <h6><a href="#"><?php echo $value["product_title"] ?> </a></h6>
+                            <p><?php echo $value["amount"] ?>x - <span class="price"><?php echo $value["product_price"] ?> VND</span></p>
+                        </li>
+                        <?php }?>
+                        <li class="total">
+                            <a href="#" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
+                            <span class="float-right"><strong>Tổng</strong>: <?php echo $total; ?> VND</span>
+                        </li>
+                    </ul>
+                </li>
+            </div>
         </nav>
-        <!-- End Navigation -->
     </header>
-    <!-- End Main Top -->
 
-    <!-- Start Top Search -->
+    <?=$content?>
 
-    <!-- End Top Search -->
-
-
-<?=$content?>
-<?php $j=Yii::$app->homeUrl.'uploads/';
-
-?>
-<?php
-$h = Products::find()->all();
-
-?>
-    <!-- Start Instagram Feed  -->
+    <?php
+    $h = Products::find()->all();
+    print_r($session['cart']);
+    ?>
     <div class="instagram-box">
         <div class="main-instagram owl-carousel owl-theme">
-        <?php foreach ($h as $key2 => $value2) {
-    if ($value2) {
-
+        <?php 
+            foreach ($h as $key2 => $value2) {
+            if ($value2) {
         ?>
             <div class="item">
-            
                 <div class="ins-inner-box">
-                   
-                    <img src="<?php echo $j ?><?php echo $value2["product_img"] ?>" alt="" />
-
+                    <img src="<?php echo $j ?><?php echo $value2["product_img"] ?>" alt=""/>
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
-                 
                 </div>
-                
             </div>
             <?php }?>
                 <?php }?>
@@ -185,15 +210,12 @@ $h = Products::find()->all();
         </div>
     </footer>
     <!-- End Footer  -->
-
     <!-- Start copyright  -->
     <div class="footer-copyright">
         <p class="footer-company">All Rights Reserved. &copy; 2021 <a href="#">FreshShop</a> Design By :DuongQuang
     </div>
     <!-- End copyright  -->
-
     <a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
-
 <?php $this->endBody()?>
 </body>
 </html>

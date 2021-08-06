@@ -2,6 +2,7 @@
 
 use backend\models\Products;
 use yii\db\Expression;
+use yii\helpers\Html;
 /* @var $this yii\web\View */
 
 $this->title = 'My Yii Application';
@@ -100,11 +101,12 @@ $model1 = Products::find()->orderBy(new Expression('rand()'))->limit(4)->all();
                     </div>
                 </div>
             </div>
-            <?php $j=Yii::$app->homeUrl.'uploads/';
+            <?php $j = Yii::$app->homeUrl . 'uploads/';
 ?>
             <div class="row special-list">
                 <?php
 foreach ($model1 as $key):
+
     
 ?>
                 <div class="col-lg-3 col-md-6 special-grid best-seller">
@@ -120,7 +122,11 @@ foreach ($model1 as $key):
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
                                 </ul>
-                                <a class="cart" href="#">Add to Cart</a>
+                                <?php 
+                                
+                                    echo Html::a('Thêm giỏ hàng',['shopping/','id'  => $key->id ],['class'=>'cart']);
+                                ?>
+                               
                             </div>
                         </div>
                         <div class="why-text">
