@@ -58,12 +58,23 @@ class Cart {
            $total+=$value["product_price"]*$value["amount"];
         }
     }
-    public function delcart($id){
-        if (isset($session['cart'][$id])) {
+    public function delitemcart($id){
+        $session =yii::$app->session;
+        if(isset($session["cart"])){
+            $cart=$session["cart"];
+            unset($cart[$id]);
+            $session['cart']=$cart;
+        }   
+    }
+    public function updatecart($id,$amount){
+        $session =yii::$app->session;
+        if(isset($session["cart"])){
+            $cart=$session["cart"];
+            $cart[$id]['amount']=$amount;
+            $session['cart']=$cart;
+        }   
+        
 
-            unset($session['cart'][$id]);
-
-        }
     }
         
   }

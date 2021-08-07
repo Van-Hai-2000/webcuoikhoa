@@ -1,19 +1,14 @@
 
 <?php
 
-/* @var $this yii\web\View */
-/* @var $form yii\bootstrap\ActiveForm */
-/* @var $model \frontend\models\ContactForm */
-
 use yii\helpers\Html;
+use yii\web\Request;
 use yii\web\Session;
 $this->title = 'Cart';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-cart">
     <h1><?=Html::encode($this->title)?></h1>
-
-    <!-- Start All Title Box -->
     <div class="all-title-box">
         <div class="container">
             <div class="row">
@@ -23,9 +18,6 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
     </div>
-    <!-- End All Title Box -->
-
-    <!-- Start Cart  -->
     <div class="cart-box-main">
         <div class="container">
             <div class="row">
@@ -45,6 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             </thead>
                             <tbody>
                             <?php
+$request = Yii::$app->request;
 foreach ($infoCart as $key => $value) {?>
                                 <tr>
                                     <td class="thumbnail-img">
@@ -63,26 +56,22 @@ foreach ($infoCart as $key => $value) {?>
                                     <td class="price-pr">
                                         <p><?php echo $value["product_price"] ?> VND</p>
                                     </td>
-                                    <td class="quantity-box"><input type="number" size="4" value="<?php echo $value["amount"] ?>" min="0" step="1" class="c-input-text qty text"></td>
+                                    <td class="quantity-box">
+                                        <input type="number" name="amount" size="4"  value="<?php echo $value["amount"] ?>" min="0" step="1" class="c-input-text qty text"></td>
                                     <td class="total-pr">
                                         <p><?php echo number_format($value["amount"] * $value["product_price"]) ?></p>
                                     </td>
                                     <td class="remove-pr">
                                     <?php
-
-    echo Html::a('<i class="fas fa-times"></i>', ['shopping/', 'id' => $value["id"]]);
-    if (isset($session['cart'][$id])) {
-
-        unset($session['cart'][$id]);
-
-    }
+                                        echo Html::a('<i class="fas fa-times"></i>', ['shopping/delcart', 'id' => $value["id"]]);
+                                        $qty = $request->get('amount');
+                                        echo $qty;
+                                        echo Html::a('Cập nhật', ['shopping/update', 'id' => $value["id"], 'amount' => $qty]);
     ?>
-
-
 								</a>
                                 </td>
-
-                                </tr> <?php }?>
+                                </tr>
+                                <?php }?>
                             </tbody>
                         </table>
                     </div>
@@ -102,7 +91,7 @@ foreach ($infoCart as $key => $value) {?>
                 </div>
                 <div class="col-lg-6 col-sm-6">
                     <div class="update-box">
-                        <input value="Update Cart" type="submit">
+
                     </div>
                 </div>
             </div>

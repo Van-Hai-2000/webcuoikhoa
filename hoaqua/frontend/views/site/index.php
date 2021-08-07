@@ -124,7 +124,7 @@ foreach ($model1 as $key):
                                 </ul>
                                 <?php 
                                 
-                                    echo Html::a('Thêm giỏ hàng',['shopping/','id'  => $key->id ],['class'=>'cart']);
+                                    echo Html::a('Thêm giỏ hàng',['shopping/addcart','id'  => $key->id ],['class'=>'cart']);
                                 ?>
                                
                             </div>
