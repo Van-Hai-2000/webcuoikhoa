@@ -81,7 +81,9 @@ AppAsset::register($this);
                                 <?php echo Html::a('Đơn đặt hàng', ['/orders'],['class'=>($control=='orders') ? 'list-group-item active' : 'list-group-item' ])?>
                                 <?php echo Html::a('Các mặt hàng đã đặt', ['/ordersitems'],['class'=>($control=='ordersitems') ? 'list-group-item active' : 'list-group-item' ])?>
                                 <?php echo Html::a('Sản phẩm', ['/products'],['class'=>($control=='products') ? 'list-group-item active' : 'list-group-item' ])?>
-                                <?php echo Html::a('Sản phẩm', ['/file'],['class'=>($control=='file') ? 'list-group-item active' : 'list-group-item' ])?>
+                                <?php echo Html::a('Quản lý file', ['/file'],['class'=>($control=='file') ? 'list-group-item active' : 'list-group-item' ])?>
+                                <?php echo Html::a('Banner', ['/banner'],['class'=>($control=='file') ? 'list-group-item active' : 'list-group-item' ])?>
+                                <?php echo Html::a('Tin Tức', ['/news'],['class'=>($control=='file') ? 'list-group-item active' : 'list-group-item' ])?>
                             </ul>
 
                         </div>

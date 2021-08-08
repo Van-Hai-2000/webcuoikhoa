@@ -23,7 +23,7 @@ class FileController extends Controller
      *
      * @return string
      */
-    public function actionIndex()
+    public function actionFile()
     {
         return $this->render('index');
     }

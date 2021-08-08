@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
           <div class="panel-heading">
                 <h3 class="panel-title"><?=Html::encode($this->title)?></h3>
           </div>
-          <div class="panel-body">
+          <div class="panel-body" style="overflow: scroll;">
           <p class="pull-right">
         <?=Html::a('Thêm sản phẩm', ['create'], ['class' => 'btn btn-success'])?>
     </p>
@@ -46,16 +46,13 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         [
             'attribute' => 'product_cat',
-            // 'label'=>' Tên cột'
+           
             'content' => function ($model) {
                 $Cate = Categories::find()->all();
-              
                 foreach ($Cate as $key => $value) {
                     iF($model->product_cat == $value['id']){
                         return $model->product_cat = $value['title'];
                     }
-                     
-                    print_r($model->product_cat);
                 }
             },
             'headerOptions' =>

@@ -1,10 +1,7 @@
 
 <?php
 
-use Symfony\Component\DomCrawler\Field\FormField;
 use yii\helpers\Html;
-use yii\web\Request;
-use yii\web\Session;
 use yii\widgets\ActiveForm;
 $this->title = 'Cart';
 $this->params['breadcrumbs'][] = $this->title;
@@ -38,10 +35,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php
-                            $request = Yii::$app->request;
-                            foreach ($infoCart as $key => $value) {
-                            ?>
+                                <?php
+                                    $sub_total=$discount=$totalt1=$total=0;
+                                foreach ($infoCart as $key => $value) {
+                                    $sub_total += $value["amount"] * $value["product_price"];
+                                    $discount = ($sub_total * 10) / 100;
+                                    $totalt1 += ($value["amount"] * $value["product_price"]) - $discount;
+                                    $total = $totalt1 + 30000;
+                                    ?>
                                 <tr>
                                     <td class="thumbnail-img">
                                             <?php echo $value["id"]; ?>
@@ -66,8 +67,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                     </td>
                                     <td class="remove-pr">
                                     <?php
-                                        echo Html::a('<i class="fas fa-times"></i>', ['shopping/delcart', 'id' => $value["id"]]);
-                                    ?>
+echo Html::a('<i class="fas fa-times"></i>', ['shopping/delcart', 'id' => $value["id"]]);
+    ?>
 								</a>
                                 </td>
                                 </tr>
@@ -98,37 +99,43 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <div class="row my-5">
                 <div class="col-lg-8 col-sm-12"></div>
+
+
+
+
+
+
+
+
                 <div class="col-lg-4 col-sm-12">
                     <div class="order-box">
-                        <h3>Order summary</h3>
+                        <h3>Giỏ hàng</h3>
                         <div class="d-flex">
-                            <h4>Sub Total</h4>
-                            <div class="ml-auto font-weight-bold"> <?php number_format($value["amount"] * $value["product_price"]) ?>  VND </div>
+                            <h4>Tạm tính</h4>
+                            <div class="ml-auto font-weight-bold"> <?php echo number_format($sub_total) ?>  VND </div>
                         </div>
                         <div class="d-flex">
-                            <h4>Discount</h4>
-                            <div class="ml-auto font-weight-bold"> $ 40 </div>
+                            <h4>Giảm giá</h4>
+                            <div class="ml-auto font-weight-bold"> <?php echo '10%' ?> </div>
                         </div>
                         <hr class="my-1">
+
                         <div class="d-flex">
-                            <h4>Coupon Discount</h4>
-                            <div class="ml-auto font-weight-bold"> $ 10 </div>
+                            <h4>Giá giảm sau khi giảm</h4>
+                            <div class="ml-auto font-weight-bold"><?php echo $totalt1 ?> </div>
                         </div>
                         <div class="d-flex">
-                            <h4>Tax</h4>
-                            <div class="ml-auto font-weight-bold"> $ 2 </div>
-                        </div>
-                        <div class="d-flex">
-                            <h4>Shipping Cost</h4>
-                            <div class="ml-auto font-weight-bold"> Free </div>
+                            <h4>Phí giao hàng</h4>
+                            <div class="ml-auto font-weight-bold"><?php echo '30.000' ?>VND  </div>
                         </div>
                         <hr>
                         <div class="d-flex gr-total">
-                            <h5>Grand Total</h5>
-                            <div class="ml-auto h5"> $ 388 </div>
+                            <h5>Tổng tiền</h5>
+                            <div class="ml-auto h5"> <?php echo $total ?>  </div>
                         </div>
                         <hr> </div>
                 </div>
+
                 <div class="col-12 d-flex shopping-box"><a href="checkout?id=2" class="ml-auto btn hvr-hover">Checkout</a> </div>
             </div>
 
