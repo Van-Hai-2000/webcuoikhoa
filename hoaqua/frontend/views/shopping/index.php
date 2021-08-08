@@ -1,9 +1,11 @@
 
 <?php
 
+use Symfony\Component\DomCrawler\Field\FormField;
 use yii\helpers\Html;
 use yii\web\Request;
 use yii\web\Session;
+use yii\widgets\ActiveForm;
 $this->title = 'Cart';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -37,8 +39,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             </thead>
                             <tbody>
                             <?php
-$request = Yii::$app->request;
-foreach ($infoCart as $key => $value) {?>
+                            $request = Yii::$app->request;
+                            foreach ($infoCart as $key => $value) {
+                            ?>
                                 <tr>
                                     <td class="thumbnail-img">
                                             <?php echo $value["id"]; ?>
@@ -57,17 +60,14 @@ foreach ($infoCart as $key => $value) {?>
                                         <p><?php echo $value["product_price"] ?> VND</p>
                                     </td>
                                     <td class="quantity-box">
-                                        <input type="number" name="amount" size="4"  value="<?php echo $value["amount"] ?>" min="0" step="1" class="c-input-text qty text"></td>
+                                        <input type="number" id="amount_<?php echo $key ?>" name="amount_<?php echo $key ?>" size="4"  value="<?php echo $value["amount"] ?>" min="0" step="1" class="c-input-text qty text"></td>
                                     <td class="total-pr">
                                         <p><?php echo number_format($value["amount"] * $value["product_price"]) ?></p>
                                     </td>
                                     <td class="remove-pr">
                                     <?php
                                         echo Html::a('<i class="fas fa-times"></i>', ['shopping/delcart', 'id' => $value["id"]]);
-                                        $qty = $request->get('amount');
-                                        echo $qty;
-                                        echo Html::a('Cập nhật', ['shopping/update', 'id' => $value["id"], 'amount' => $qty]);
-    ?>
+                                    ?>
 								</a>
                                 </td>
                                 </tr>
@@ -103,7 +103,7 @@ foreach ($infoCart as $key => $value) {?>
                         <h3>Order summary</h3>
                         <div class="d-flex">
                             <h4>Sub Total</h4>
-                            <div class="ml-auto font-weight-bold"> $ 130 </div>
+                            <div class="ml-auto font-weight-bold"> <?php number_format($value["amount"] * $value["product_price"]) ?>  VND </div>
                         </div>
                         <div class="d-flex">
                             <h4>Discount</h4>
@@ -129,7 +129,7 @@ foreach ($infoCart as $key => $value) {?>
                         </div>
                         <hr> </div>
                 </div>
-                <div class="col-12 d-flex shopping-box"><a href="checkout.html" class="ml-auto btn hvr-hover">Checkout</a> </div>
+                <div class="col-12 d-flex shopping-box"><a href="checkout?id=2" class="ml-auto btn hvr-hover">Checkout</a> </div>
             </div>
 
         </div>

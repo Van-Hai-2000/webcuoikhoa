@@ -77,8 +77,13 @@ $model = Products::find()->limit(3)->all();
 		</div>
 	</div>
     <?php
-$model1 = Products::find()->orderBy(new Expression('rand()'))->limit(4)->all();
-?>
+        $model1 = Products::find()->where(['product_cat' => 1])->orderBy(new Expression('rand()'))->limit(4)->all();
+        $model2 = Products::find()->where(['product_cat' => 2])->orderBy(new Expression('rand()'))->limit(4)->all();
+        $model3 = Products::find()->where(['product_cat' => 3])->orderBy(new Expression('rand()'))->limit(4)->all();
+        $model4 = Products::find()->where(['product_cat' => 4])->orderBy(new Expression('rand()'))->limit(4)->all();
+        
+        $j=Yii::$app->homeUrl.'uploads/';
+    ?>
     <!-- Start Products  -->
     <div class="products-box">
         <div class="container">
@@ -94,22 +99,21 @@ $model1 = Products::find()->orderBy(new Expression('rand()'))->limit(4)->all();
                 <div class="col-lg-12">
                     <div class="special-menu text-center">
                         <div class="button-group filter-button-group">
-                            <button class="active" data-filter="*">All</button>
-                            <button data-filter=".top-featured">Top featured</button>
-                            <button data-filter=".best-seller">Best seller</button>
+                            <button class="active" data-filter="*">ALL</button>
+                            <button data-filter=".kh_1">Rau</button>
+                            <button data-filter=".kh_2">Hoa</button>
+                            <button data-filter=".kh_3">Quả</button>
+                            <button data-filter=".kh_4">Củ</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <?php $j = Yii::$app->homeUrl . 'uploads/';
-?>
             <div class="row special-list">
                 <?php
-foreach ($model1 as $key):
-
-    
-?>
-                <div class="col-lg-3 col-md-6 special-grid best-seller">
+                foreach ($model1 as $key):
+                ?>
+                <div class="col-lg-3 col-md-6 special-grid <?php echo 'kh_'.'1'; ?>">
+               
                     <div class="products-single fix">
                         <div class="box-img-hover">
                             <div class="type-lb">
@@ -134,11 +138,96 @@ foreach ($model1 as $key):
                             <h5> <?php echo $key->product_price ?>VND</h5>
                         </div>
                     </div>
+                   
                 </div>
-
-
-<?php endforeach;?>
-
+                <?php endforeach;?>
+                <?php foreach ($model2 as $key2):
+                ?>
+                <div class="col-lg-3 col-md-6 special-grid <?php echo 'kh_'.'2'; ?>">
+                    <div class="products-single fix">
+                        <div class="box-img-hover">
+                            <div class="type-lb">
+                                <p class="sale">Sale</p>
+                            </div>
+                            <img src="<?php echo $j ?><?php echo $key2->product_img ?>" class="img-fluid" alt="<?php echo $key2->product_title ?>">
+                            <div class="mask-icon">
+                                <ul>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                </ul>
+                                <?php 
+                                
+                                    echo Html::a('Thêm giỏ hàng',['shopping/addcart','id'  => $key2->id ],['class'=>'cart']);
+                                ?>
+                               
+                            </div>
+                        </div>
+                        <div class="why-text">
+                            <h4><?php echo $key2->product_title ?></h4>
+                            <h5> <?php echo $key2->product_price ?>VND</h5>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach;?>
+                <?php foreach ($model3 as $key2):
+                ?>
+                <div class="col-lg-3 col-md-6 special-grid <?php echo 'kh_'.'3'; ?>">
+                    <div class="products-single fix">
+                        <div class="box-img-hover">
+                            <div class="type-lb">
+                                <p class="sale">Sale</p>
+                            </div>
+                            <img src="<?php echo $j ?><?php echo $key2->product_img ?>" class="img-fluid" alt="<?php echo $key2->product_title ?>">
+                            <div class="mask-icon">
+                                <ul>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                </ul>
+                                <?php 
+                                
+                                    echo Html::a('Thêm giỏ hàng',['shopping/addcart','id'  => $key2->id ],['class'=>'cart']);
+                                ?>
+                               
+                            </div>
+                        </div>
+                        <div class="why-text">
+                            <h4><?php echo $key2->product_title ?></h4>
+                            <h5> <?php echo $key2->product_price ?>VND</h5>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach;?>
+                <?php foreach ($model4 as $key2):
+                ?>
+                <div class="col-lg-3 col-md-6 special-grid <?php echo 'kh_'.'4'; ?>">
+                    <div class="products-single fix">
+                        <div class="box-img-hover">
+                            <div class="type-lb">
+                                <p class="sale">Sale</p>
+                            </div>
+                            <img src="<?php echo $j ?><?php echo $key2->product_img ?>" class="img-fluid" alt="<?php echo $key2->product_title ?>">
+                            <div class="mask-icon">
+                                <ul>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                </ul>
+                                <?php 
+                                
+                                    echo Html::a('Thêm giỏ hàng',['shopping/addcart','id'  => $key2->id ],['class'=>'cart']);
+                                ?>
+                               
+                            </div>
+                        </div>
+                        <div class="why-text">
+                            <h4><?php echo $key2->product_title ?></h4>
+                            <h5> <?php echo $key2->product_price ?>VND</h5>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach;?>
             </div>
         </div>
     </div>

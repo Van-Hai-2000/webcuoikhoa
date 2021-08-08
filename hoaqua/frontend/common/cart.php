@@ -68,13 +68,18 @@ class Cart {
     }
     public function updatecart($id,$amount){
         $session =yii::$app->session;
-        if(isset($session["cart"])){
+        if (isset($session["cart"])) {
             $cart=$session["cart"];
             $cart[$id]['amount']=$amount;
             $session['cart']=$cart;
-        }   
-        
-
+        }
+    }
+    public function viewcheckout(){
+        $session =yii::$app->session;
+        if(isset($session["cart"]))
+        {
+            $cart=$session["cart"];
+        }
     }
         
   }

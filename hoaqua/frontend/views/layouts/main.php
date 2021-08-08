@@ -66,7 +66,7 @@ $baseurl = str_replace('site', '', $url);
                                 <li><?php echo html::a('Shop', ['site/shop']); ?></li>
 								<li><?php echo html::a('Chi tiết sản phẩm', ['site/shopmore']); ?></li>
                                 <li><?php echo html::a('Giỏ hàng', ['shopping/']); ?></li>
-                                <li><?php echo html::a('Thanh toán', ['site/checkout']); ?></li>
+                                <li><?php echo html::a('Thanh toán', ['shopping/checkout']); ?></li>
                                 <li><?php echo html::a('Tài khoản', ['site/login']); ?></li>
                             </ul>
                         </li>
@@ -102,10 +102,8 @@ $baseurl = str_replace('site', '', $url);
                                         }
                                         else{
                                             $totalAmount = $total = 0;
-                                        }
-                                        
+                                        } 
                                     }
-                              
                                 echo $totalAmount;
                                 ?>
                                 </span>
@@ -144,16 +142,14 @@ $baseurl = str_replace('site', '', $url);
             </div>
         </nav>
     </header>
-
     <?=$content?>
-
     <?php
-$h = Products::find()->all();
-?>
+        $h = Products::find()->all();
+    ?>
     <div class="instagram-box">
         <div class="main-instagram owl-carousel owl-theme">
         <?php
-foreach ($h as $key2 => $value2) {
+        foreach ($h as $key2 => $value2) {
     if ($value2) {
         ?>
             <div class="item">

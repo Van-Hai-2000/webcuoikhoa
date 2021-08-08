@@ -36,5 +36,11 @@ class ShoppingController extends \yii\web\Controller
         $cart=$cart->updatecart($id,$amount);
         return $this->render('cart',['cart'=>$cart]);
     }
-   
+    public function actionCheckout($id)
+    {
+        $cart = new cart(); 
+        $session = Yii::$app->session;
+        $infoCart = $session['cart'];
+        return $this->render('checkout',['infoCart' => $infoCart]);
+    }
 }
