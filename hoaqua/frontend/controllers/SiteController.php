@@ -301,4 +301,7 @@ class SiteController extends Controller
             'model' => $model
         ]);
     }
+    public function actionShopping(){
+        return $this->redirect('/shopping');
+    }
 }

@@ -11,8 +11,6 @@ $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
-    
-
     <div class="container">
     <h1><?= Html::encode($this->title) ?></h1>
         <div class="row">
@@ -29,6 +27,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         If you forgot your password you can <?= Html::a('reset it', ['site/request-password-reset']) ?>.
                         <br>
                         Need new verification email? <?= Html::a('Resend', ['site/resend-verification-email']) ?>
+                        <br>
+                        Bạn chưa có tài khoản đăng kí tại đây? <?= Html::a('Signup', ['site/signup']) ?>
                     </div>
 
                     <div class="form-group">
@@ -37,6 +37,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?php ActiveForm::end(); ?>
             </div>
+            <?php 
+
+            ?>
         </div>
     </div>
 </div>

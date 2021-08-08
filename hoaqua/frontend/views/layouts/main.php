@@ -70,7 +70,7 @@ $baseurl = str_replace('site', '', $url);
                                 <li><?php echo html::a('Tài khoản', ['site/login']); ?></li>
                             </ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                        <li class="nav-item"><a class="nav-link" href="">Gallery</a></li>
                         <li class="nav-item"><?php echo html::a('Liên hệ', ['site/contact']); ?></li>
                     </ul>
                 </div>
@@ -134,7 +134,7 @@ $baseurl = str_replace('site', '', $url);
                             }
                         ?>
                         <li class="total">
-                            <a href="#" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
+                            <a href="shopping/" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
                             <span class="float-right"><strong>Tổng</strong>: <?php echo $total; ?> VND</span>
                         </li>
                     </ul>
