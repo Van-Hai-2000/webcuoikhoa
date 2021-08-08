@@ -263,7 +263,7 @@ $model = Products::find()->limit(3)->all();
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4 col-xl-4">
+                <!-- <div class="col-md-6 col-lg-4 col-xl-4">
                     <div class="blog-box">
                         <div class="blog-img">
                             <img class="img-fluid" src="images/blog-img-01.jpg" alt="" />
@@ -298,7 +298,7 @@ $model = Products::find()->limit(3)->all();
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

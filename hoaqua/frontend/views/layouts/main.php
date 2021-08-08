@@ -66,7 +66,7 @@ $baseurl = str_replace('site', '', $url);
                                 <li><?php echo html::a('Shop', ['site/shop']); ?></li>
 								<li><?php echo html::a('Chi tiết sản phẩm', ['site/shopmore']); ?></li>
                                 <li><?php echo html::a('Giỏ hàng', ['shopping/']); ?></li>
-                                <li><?php echo html::a('Thanh toán', ['shopping/checkout']); ?></li>
+                                <li><?php echo html::a('Thanh toán', ['site/checkout']); ?></li>
                                 <li><?php echo html::a('Tài khoản', ['site/login']); ?></li>
                             </ul>
                         </li>
